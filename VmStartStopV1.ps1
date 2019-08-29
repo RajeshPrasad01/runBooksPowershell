@@ -4,12 +4,11 @@ Connect-AzureRmAccount -CertificateThumbprint $myAutomationConnection.Certificat
 
 $myAuzureContext = Select-AzureRmSubscription -Subscription $myAutomationConnection.SubscriptionId
 
-$myTestRG = New-AzureRmResourceGroup -Name TestRG -Location EastUs2
 $myVMs = Get-AzureRmVm -ResourceGroupName TestRG 
 Foreach ($myVm in $myVMs.Name) {
 
 Write-Output "Stopping Vm .." $myVm
-Stop-AzureRmVm -Name $myVM -ResourceGroupName TestRG -StayProvisioned -Force 
+Start-AzureRmVm -Name $myVM -ResourceGroupName TestRG -StayProvisioned -Force 
 $myVmStatus = Get-AzureRmVm -ResourceGroupName TestRG -Name $myVm -Status 
 
 If ($myVmStatus.Statuses[1].DisplayStatus -ne "VM running") { 
