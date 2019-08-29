@@ -8,7 +8,7 @@ $myVMs = Get-AzureRmVm -ResourceGroupName TestRG
 Foreach ($myVm in $myVMs.Name) {
 
 Write-Output "Stopping Vm .." $myVm
-Start-AzureRmVm -Name $myVM -ResourceGroupName TestRG -StayProvisioned -Force 
+Start-AzureRmVm -Name $myVM -ResourceGroupName TestRG  
 $myVmStatus = Get-AzureRmVm -ResourceGroupName TestRG -Name $myVm -Status 
 
 If ($myVmStatus.Statuses[1].DisplayStatus -ne "VM running") { 
